@@ -25,7 +25,7 @@
           </a>
         </li>                        
         <li>
-          <a href="../widgets.html">
+          <a href="{{asset('/')}}">
             <i class="fa fa-power-off"></i> <span>Cerrar Sesión</span>
           </a>
         </li>        
