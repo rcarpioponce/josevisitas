@@ -29,3 +29,7 @@ Route::get('/mantenimiento', function()
 {
 	return View::make('visitas.mantenimiento');
 });
+Route::get('/registro', function()
+{
+	return View::make('visitas.registro');
+});
