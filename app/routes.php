@@ -11,10 +11,15 @@
 |
 */
 
+//Route::get('/', array('uses'=>'HomeController@showWelcome'));
+
 Route::get('/', function()
 {
 	return View::make('visitas.login');
 });
+Route::get('/mantenimiento', array('uses' => 'MantenimientoController@index'));
+Route::post('/mantenimiento', array('uses' => 'MantenimientoController@addUsuario'));
+
 
 Route::get('/admin', function()
 {
@@ -24,10 +29,6 @@ Route::get('/admin', function()
 Route::get('/correos', function()
 {
 	return View::make('visitas.correos');
-});
-Route::get('/mantenimiento', function()
-{
-	return View::make('visitas.mantenimiento');
 });
 Route::get('/registro', function()
 {

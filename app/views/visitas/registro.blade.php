@@ -4,7 +4,7 @@ Registro del Visitante
 @stop
 @section('work_area')
 <div class="container-fluid">
-	<form>
+	<form method="post">
 		<div class="row">
 			<h1>Datos Personales</h1>
 			<div class="form-group col-lg-4">

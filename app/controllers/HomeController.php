@@ -1,5 +1,5 @@
 <?php
-
+use AppVisitas\Entities\Cargo;
 class HomeController extends BaseController {
 
 	/*
@@ -17,7 +17,8 @@ class HomeController extends BaseController {
 
 	public function showWelcome()
 	{
-		return View::make('hello');
+		$x = new Cargo;
+		return Cargo::all();
 	}
 
 }
