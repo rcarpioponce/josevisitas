@@ -13,7 +13,9 @@
 
 App::before(function($request)
 {
-	//
+	if (!Auth::check()){
+		Redirect::to('/');
+	}
 });
 
 

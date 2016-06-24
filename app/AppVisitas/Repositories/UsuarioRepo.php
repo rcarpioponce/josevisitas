@@ -21,7 +21,19 @@ class UsuarioRepo{
 	}
 	public function addUsuario(){
 		$this->inputs = \Input::all();
+		$this->inputs['Clave'] = \Hash::make($this->inputs['Clave']);
 		User::create($this->inputs);
 		return $this->getModulo();
+	}
+	public function login(){
+		$this->inputs = \Input::all();
+		$login 		= $this->inputs['login'];
+		$password 	= $this->inputs['password'];
+		if (\Auth::attempt(array('login' => $login, 'password' => $password)))
+		{
+    		return \Redirect::to('registro');
+		}else{
+			return \Redirect::to('/');
+		}
 	}
 }

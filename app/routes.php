@@ -13,9 +13,13 @@
 
 //Route::get('/', array('uses'=>'HomeController@showWelcome'));
 
-Route::get('/', function()
-{
+Route::get('/', function(){
 	return View::make('visitas.login');
+});
+Route::post('/', array('uses' => 'AuthController@login'));
+Route::get('/logout', function(){
+	Auth::logout();
+	return \Redirect::to('/');;
 });
 Route::get('/mantenimiento', array('uses' => 'MantenimientoController@index'));
 Route::post('/mantenimiento', array('uses' => 'MantenimientoController@addUsuario'));

@@ -27,4 +27,7 @@ class User extends \Eloquent implements UserInterface, RemindableInterface {
 	protected $fillable = array('Apellidos', 'Nombres','Login','Clave','Cod_Cargo');
 	protected $hidden = array('Clave', 'remember_token');
 
+	public function getAuthPassword() {
+    	return $this->Clave;
+	}
 }

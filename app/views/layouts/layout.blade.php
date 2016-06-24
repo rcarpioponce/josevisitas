@@ -54,7 +54,7 @@
       <!-- Sidebar user panel -->
       <div class="user-panel">
        
-          <p style="color:white">Bievenido: Jose Sotomayor</p>
+          <p style="color:white"> Bienvenido: {{Auth::user()->Nombres}} {{Auth::user()->Apellidos}}</p>
        
       </div>
       <!-- search form -->

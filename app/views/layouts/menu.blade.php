@@ -25,7 +25,7 @@
           </a>
         </li>                        
         <li>
-          <a href="{{asset('/')}}">
+          <a href="{{asset('/logout')}}">
             <i class="fa fa-power-off"></i> <span>Cerrar Sesión</span>
           </a>
         </li>        
