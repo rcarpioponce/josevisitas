@@ -38,6 +38,9 @@ Registro del Visitante
 				<label>Distrito</label>
 				<select class="form-control" name="distrito">
 					<option value="">Seleccione</option>
+					@foreach($arDistritos as $d)
+					<option value={{$d['Cod_Distrito']}}"">{{$d['Descripcion']}}</option>
+					@endforeach
 				</select>
 			</div>
 			<div class="form-group col-lg-6">
@@ -60,6 +63,7 @@ Registro del Visitante
 			<input type="text" name="direccion" class="form-control">
 		</div>
 		@include('visitas.registro.academicos')
+		@include('visitas.registro.encuesta')
 		<div class="form-group">
 			<input type="submit" value="Registrar" class="form-control btn btn-primary">
 		</div>

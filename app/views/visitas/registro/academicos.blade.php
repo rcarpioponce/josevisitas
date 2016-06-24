@@ -4,6 +4,9 @@
 	<label>Carrera a la que postulas</label>
 	<select name="carrera_postula" class="form-control">
 		<option value="">Seleccione</option>
+		@foreach($arCarreras as $d)
+		<option value={{$d['Cod_Carrera']}}"">{{$d['Descripcion']}}</option>
+		@endforeach		
 	</select>
 </div>
 <div class="form-group">
@@ -22,6 +25,9 @@
 		<label>Año en que acabaste la secundaria</label>
 		<select name="anio_colegio" class="form-control">
 			<option value="">Seleccione</option>
+			@foreach($arAnios as $d)
+			<option value={{$d}}"">{{$d}}</option>
+			@endforeach			
 		</select>
 	</div>	
 </div>

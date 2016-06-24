@@ -30,11 +30,6 @@ Route::get('/admin', function()
 	return View::make('layouts.layout');
 });
 
-Route::get('/correos', function()
-{
-	return View::make('visitas.correos');
-});
-Route::get('/registro', function()
-{
-	return View::make('visitas.registro');
-});
+Route::get('/correos', array('uses'=> 'MailController@index'));
+Route::post('/correos', array('uses'=> 'MailController@sendMail'));
+Route::get('/registro', array('uses' => 'RegistroController@index'));
