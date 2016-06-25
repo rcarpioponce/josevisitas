@@ -116,6 +116,34 @@
     //bootstrap WYSIHTML5 - text editor
     //$(".textarea").wysihtml5();
   });
+
+  $(document).on('ready',function(){
+    //if($('#correosSelect').length == 1){
+      $('#carreraSelect').on('change',function(){
+        var carrera = $(this).val();
+        var request = $.ajax({
+          url: "{{asset('correos/carreras')}}" + "/" + carrera,
+          method: "GET",
+          dataType: "json"
+        });
+         
+        request.done(function( data ) {
+          $('#correosSelect').html('');
+          data.forEach(function(o){
+              var option = $('<option value="' + o.Correo+ '">');
+              option.html(o.Correo);
+              $('#correosSelect').append(option);
+          });
+        });
+         
+        request.fail(function( jqXHR, textStatus ) {
+          alert( "Request failed: " + textStatus );
+        });
+      });
+
+    //}
+
+});
 </script>
 </body>
 </html>

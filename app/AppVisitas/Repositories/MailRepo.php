@@ -4,13 +4,20 @@ class MailRepo{
 	public function sendEmail(){
 		//return $this->inputs;
 		$inputs = \Input::all();
-		$contenido = 'ok ok contenido 23r3r23';
+		$file = \Input::file('file');
+		if(\Input::hasFile('file')){
+
+			$file->move('adjunto', $file->getClientOriginalName());
+		}
+		$this->path = 'adjunto/'.$file->getClientOriginalName();
+		$contenido = $inputs['mensaje'];
 		$this->data = array('contenido' => $contenido);
-		$this->asunto = 'Hola Mundo';
-		$asunto = $inputs['asunto'];
+		$this->asunto = $inputs['asunto'];
+		$this->correos = explode(',',$inputs['correos']);
 		\Mail::send('emails.visitas', $this->data, function($message) use ($contenido)
 		{
-		    $message->to('me@renzocarpio.com', 'Renzo Carpio')->subject('El Sistema de visitas 1');
+		    $message->to($this->correos)->subject('Asunto:'.$this->asunto);
+		    $message->attach($this->path);
 		});
 	}
 }

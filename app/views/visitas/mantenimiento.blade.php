@@ -55,7 +55,6 @@ Mantenimiento
 			<th>Nombres</th>
 			<th>Usuario</th>
 			<th>Tipo de Usuario</th>
-			<th>Acciones</th>
 		</thead>
 		<tbody>
 			@foreach($arUsuarios as $us)
@@ -64,7 +63,6 @@ Mantenimiento
 				<td>{{$us->Nombres}}</td>
 				<td>{{$us->Login}}</td>
 				<td>{{$us->Descripcion}}</td>
-				<td>Acciones</td>
 			</tr>
 			@endforeach
 		</tbody>

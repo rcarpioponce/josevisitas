@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'visitas',
-			'username'  => 'root',
-			'password'  => '',
+			'database'  => 'bitrix_visitas',
+			'username'  => 'bitrix_visitas',
+			'password'  => '123456.',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

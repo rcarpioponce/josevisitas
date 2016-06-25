@@ -33,3 +33,13 @@ Route::get('/admin', function()
 Route::get('/correos', array('uses'=> 'MailController@index'));
 Route::post('/correos', array('uses'=> 'MailController@sendMail'));
 Route::get('/registro', array('uses' => 'RegistroController@index'));
+Route::post('/registro', array('uses' => 'RegistroController@saveVisita'));
+Route::get('/lista', array('uses' => 'RegistroController@listaVisita'));
+
+Route::get('correos/carreras/{cod}',function($cod){
+	return \DB::table('persona')
+							->join('visita','persona.Cod_Persona','=','visita.Cod_Persona')
+							->join('carreras','visita.Cod_carrera','=','carreras.Cod_carrera')
+							->select(\DB::raw('persona.*'),'visita.Fec_Reg',\DB::raw('carreras.Descripcion as carrera'))->
+							where('visita.Cod_carrera','=',$cod)->get();
+});

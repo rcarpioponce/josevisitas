@@ -9,11 +9,11 @@
             <i class="fa fa-list"></i> <span>Lista de Visitantes</span>
           </a>
         </li>
-        <li>
-          <a href="{{asset('estadistica')}}">
-            <i class="fa fa-pie-chart"></i> <span>Estadística</span>
-          </a>
-        </li>
+<!--         <li>
+  <a href="{{asset('estadistica')}}">
+    <i class="fa fa-pie-chart"></i> <span>Estadística</span>
+  </a>
+</li> -->
         <li>
           <a href="{{asset('correos')}}">
             <i class="fa fa-envelope"></i> <span>Correos</span>

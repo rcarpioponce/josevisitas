@@ -9,34 +9,34 @@ Registro del Visitante
 			<h1>Datos Personales</h1>
 			<div class="form-group col-lg-4">
 				<label>Apellido Paterno</label>
-				<input type="text" name="ape_paterno" class="form-control">
+				<input type="text" name="persona[Materno]" class="form-control">
 			</div>
 			<div class="form-group col-lg-4">
 				<label>Apellido Materno</label>
-				<input type="text" name="ape_materno" class="form-control">
+				<input type="text" name="persona[Paterno]" class="form-control">
 			</div>
 			<div class="form-group col-lg-4">
 				<label>Nombres</label>
-				<input type="text" name="nombres" class="form-control">
+				<input type="text" name="persona[Nombres]" class="form-control">
 			</div>						
 		</div>
 		<div class="row">
 			<div class="form-group col-lg-6">
 				<label>Sexo</label>
-				<select class="form-control" name="sexo">
+				<select class="form-control" name="persona[Sexo]">
 					<option value="M">Masculino</option>
 					<option value="F">Femenino</option>
 				</select>
 			</div>
 			<div class="form-group col-lg-6">
 				<label>Edad</label>
-				<input type="text" name="edad" class="form-control">
+				<input type="text" name="persona[Edad]" class="form-control">
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-lg-6">
 				<label>Distrito</label>
-				<select class="form-control" name="distrito">
+				<select class="form-control" name="persona[Cod_Distrito]">
 					<option value="">Seleccione</option>
 					@foreach($arDistritos as $d)
 					<option value={{$d['Cod_Distrito']}}"">{{$d['Descripcion']}}</option>
@@ -44,23 +44,23 @@ Registro del Visitante
 				</select>
 			</div>
 			<div class="form-group col-lg-6">
-				<label>Email</label>
-				<input type="email" name="email" class="form-control">
+				<label>Correo Electrónico</label>
+				<input type="email" name="persona[Correo]" class="form-control">
 			</div>
 		</div>
 		<div class="row">
 			<div class="form-group col-lg-6">
 				<label>Celular</label>
-				<input type="text" name="celular" class="form-control">
+				<input type="text" name="persona[Celular]" class="form-control">
 			</div>
 			<div class="form-group col-lg-6">
 				<label>Teléfono</label>
-				<input type="text" name="telefono" class="form-control">
+				<input type="text" name="persona[Telefono]" class="form-control">
 			</div>						
 		</div>				
 		<div class="form-group">
 			<label>Dirección de casa</label>
-			<input type="text" name="direccion" class="form-control">
+			<input type="text" name="persona[Domicilio]" class="form-control">
 		</div>
 		@include('visitas.registro.academicos')
 		@include('visitas.registro.encuesta')

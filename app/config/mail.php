@@ -23,7 +23,7 @@ return array(
 	| the Mailgun mail service which will provide reliable deliveries.
 	|
 	*/
-	'host' => 'commodore.websitewelcome.com', //'smtp.office365.com',//
+	'host' => 'smtp.gmail.com',//'commodore.websitewelcome.com', //'smtp.office365.com',//
 	/*
 	|--------------------------------------------------------------------------
 	| SMTP Host Port
@@ -35,7 +35,7 @@ return array(
 	|
 	*/
 	//'port' => 465,// 587,  
-	'port' => 465,
+	'port' => 587,
 	/*
 	|--------------------------------------------------------------------------
 	| Global "From" Address
@@ -46,7 +46,8 @@ return array(
 	| used globally for all e-mails that are sent by your application.
 	|
 	*/
-	'from' => array('address' => 'visitas@misproyectos.space', 'name' => 'Proyecto Visitas'),
+	//'from' => array('address' => 'visitas@misproyectos.space', 'name' => 'Proyecto Visitas'),
+	'from' => array('address' => '1207000089@upci.edu.pe', 'name' => 'Proyecto Visitas'),
 	/*
 	|--------------------------------------------------------------------------
 	| E-Mail Encryption Protocol
@@ -57,8 +58,8 @@ return array(
 	| transport layer security protocol should provide great security.
 	|
 	*/
-	'encryption' => 'ssl',
-	//'encryption' => 'tls',
+	//'encryption' => 'ssl',
+	'encryption' => 'tls',
 	/*
 	|--------------------------------------------------------------------------
 	| SMTP Server Username
@@ -69,7 +70,7 @@ return array(
 	| connection. You may also set the "password" value below this one.
 	|
 	*/
-	'username' => 'visitas@misproyectos.space',
+	'username' => '1207000089@upci.edu.pe',
 	/*
 	|--------------------------------------------------------------------------
 	| SMTP Server Password
@@ -80,7 +81,7 @@ return array(
 	| connection so that the application will be able to send messages.
 	|
 	*/
-	'password' => '123456.',
+	'password' => '@17041931@',
 	/*
 	|--------------------------------------------------------------------------
 	| Sendmail System Path
