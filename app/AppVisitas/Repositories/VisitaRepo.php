@@ -85,7 +85,7 @@ class VisitaRepo{
 	}	
 	public function listaVisita(){
 		
-		$arVisitas = $this->getTabla()->->paginate($this->numxPages);
+		$arVisitas = $this->getTabla()->paginate($this->numxPages);
 		
 /*		//revisar carreras y fechas si esta funcionando falta implementar bien
 		$arVisitas = $arVisitas->where('visita.Cod_carrera','=','1');
