@@ -15,4 +15,7 @@ class RegistroController extends Controller {
 	public function listaVisita(){
 		return $this->visitaRepo->listaVisita();
 	}
+	public function reporte(){
+		return $this->visitaRepo->getAllVisitas();
+	}
 }

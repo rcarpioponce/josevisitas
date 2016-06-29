@@ -6,7 +6,11 @@ use AppVisitas\Entities\UnivPostuladas;
 use AppVisitas\Entities\UnivVisitadas;
 use AppVisitas\Entities\RefVisitadas;
 use AppVisitas\Entities\Motivo;
+use AppVisitas\Entities\Carrera;
 class VisitaRepo{
+	public function __construct(){
+		$this->numxPages = 15;
+	}
 	public function saveVisita(){
 		$inputs = \Input::all();
 		//return dd($inputs);
@@ -61,16 +65,56 @@ class VisitaRepo{
 		$arUnivs = $inputs['motivo_visita'];
 		foreach($arUnivs as $motivo){
 			$array = array('Cod_persona' => $idPersona, 'Cod_Motivo' => $motivo , 'Id_Visita'=> $idVisita);
-			//return $array;
 			Motivo::create($array);	
 		}
-	}	
-	public function listaVisita(){
-		$arVisitas = \DB::table('persona')
+	}
+	public function getTabla(){
+		$query = \DB::table('persona')
 							->join('visita','persona.Cod_Persona','=','visita.Cod_Persona')
 							->join('carreras','visita.Cod_carrera','=','carreras.Cod_carrera')
-							->select(\DB::raw('persona.*'),'visita.Fec_Reg',\DB::raw('carreras.Descripcion as carrera'))->get();
-		//return $arVisitas[0]->Fec_Reg;
-		return \View::make('visitas.lista',array('data'=>$arVisitas));
+							->select(	'persona.Paterno',
+										'persona.Materno',
+										'persona.Nombres',
+										\DB::raw('carreras.Descripcion as carrera'),
+										'persona.Telefono',
+										'persona.Celular',
+										'persona.Correo',
+										'visita.Fec_Reg'
+										);
+		return $query;
+	}	
+	public function listaVisita(){
+		
+		$arVisitas = $this->getTabla()->->paginate($this->numxPages);
+		
+/*		//revisar carreras y fechas si esta funcionando falta implementar bien
+		$arVisitas = $arVisitas->where('visita.Cod_carrera','=','1');
+
+		$arVisitas = $arVisitas->where('persona.Paterno','=','Rojas')
+								->paginate($this->numxPages);*/
+		$arCarrera = Carrera::all();
+		return \View::make('visitas.lista',array('data'=>$arVisitas,'arCarrera'=>$arCarrera));
+	}
+	public function getAllVisitas(){
+		$this->data = $this->getTabla()->get();
+		foreach ($this->data as $key => $value) {
+			$this->data[$key] = get_object_vars($this->data[$key]);
+		}
+		//return dd($this->data);
+		$now = date('_d_m_Y_h_i_s');
+		\Excel::create('reporte'.$now, function($excel) {
+		    $excel->sheet('reporte', function($sheet) {
+		    	$sheet->setAutoFilter('A1:H1');
+		        $sheet->loadView(
+		        	'excel.index',
+		        	array(
+		        			'cabeceras'=>array('Paterno','Materno','Nombres','carrera','Telefono','Celular','Correo','Fec_Reg'),
+		        			'cabecerasText'=>array('Ap. Paterno','Ap. Materno','Nombres','Carrera','Teléfono','Celular','Correo','Fecha'),
+		        			'data'=> $this->data
+		        		)
+		        );
+
+		    });
+		})->export('xlsx');		
 	}
 }

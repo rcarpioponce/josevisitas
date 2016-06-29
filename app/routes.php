@@ -35,6 +35,7 @@ Route::post('/correos', array('uses'=> 'MailController@sendMail'));
 Route::get('/registro', array('uses' => 'RegistroController@index'));
 Route::post('/registro', array('uses' => 'RegistroController@saveVisita'));
 Route::get('/lista', array('uses' => 'RegistroController@listaVisita'));
+Route::get('/lista/reporte', array('uses' => 'RegistroController@reporte'));
 
 Route::get('correos/carreras/{cod}',function($cod){
 	return \DB::table('persona')
