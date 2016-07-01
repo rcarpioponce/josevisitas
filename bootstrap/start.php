@@ -26,7 +26,7 @@ $app = new Illuminate\Foundation\Application;
 
 $env = $app->detectEnvironment(array(
 
-	'local' => array('LENOVO-RENZO'),
+	'local' => array('LENOVO-RENZO','0310RCARPIO'),
 
 ));
 

@@ -79,13 +79,18 @@ class VisitaRepo{
 										'persona.Telefono',
 										'persona.Celular',
 										'persona.Correo',
-										'visita.Fec_Reg'
+										'visita.Fec_Reg',
+										\DB::raw('(SELECT GROUP_CONCAT(r.Descripcion SEPARATOR ",") FROM referencias_visitadas rv
+LEFT JOIN referencia r ON r.Cod_referencia = rv.Cod_referencia
+WHERE rv.Id_Visita = visita.Id_Visita) as referencias')
 										);
 		return $query;
 	}	
 	public function listaVisita(){
 		
 		$arVisitas = $this->getTabla()->paginate($this->numxPages);
+
+
 		
 /*		//revisar carreras y fechas si esta funcionando falta implementar bien
 		$arVisitas = $arVisitas->where('visita.Cod_carrera','=','1');
@@ -97,6 +102,8 @@ class VisitaRepo{
 	}
 	public function getAllVisitas(){
 		$this->data = $this->getTabla()->get();
+
+		//return dd($this->data);
 		foreach ($this->data as $key => $value) {
 			$this->data[$key] = get_object_vars($this->data[$key]);
 		}
@@ -108,8 +115,8 @@ class VisitaRepo{
 		        $sheet->loadView(
 		        	'excel.index',
 		        	array(
-		        			'cabeceras'=>array('Paterno','Materno','Nombres','carrera','Telefono','Celular','Correo','Fec_Reg'),
-		        			'cabecerasText'=>array('Ap. Paterno','Ap. Materno','Nombres','Carrera','Teléfono','Celular','Correo','Fecha'),
+		        			'cabeceras'=>array('Paterno','Materno','Nombres','carrera','Telefono','Celular','Correo','Fec_Reg','referencias'),
+		        			'cabecerasText'=>array('Ap. Paterno','Ap. Materno','Nombres','Carrera','Teléfono','Celular','Correo','Fecha','Referencias'),
 		        			'data'=> $this->data
 		        		)
 		        );
