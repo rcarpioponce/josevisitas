@@ -80,6 +80,7 @@ class VisitaRepo{
 										'persona.Celular',
 										'persona.Correo',
 										'visita.Fec_Reg',
+										'visita.Id_Visita',
 										\DB::raw('(SELECT GROUP_CONCAT(r.Descripcion SEPARATOR ",") FROM referencias_visitadas rv
 LEFT JOIN referencia r ON r.Cod_referencia = rv.Cod_referencia
 WHERE rv.Id_Visita = visita.Id_Visita) as referencias')
@@ -87,21 +88,44 @@ WHERE rv.Id_Visita = visita.Id_Visita) as referencias')
 		return $query;
 	}	
 	public function listaVisita(){
+		$inputs = \Input::All();
 		
-		$arVisitas = $this->getTabla()->paginate($this->numxPages);
+		$arVisitas = $this->getTabla();
+		if(isset($inputs['desde']) && $inputs['desde'] != ''){
+			$arVisitas = $arVisitas->where('visita.Fec_Reg','>=',$inputs['desde']);
+		}
+		if(isset($inputs['hasta']) && $inputs['hasta'] != ''){
+			$arVisitas = $arVisitas->where('visita.Fec_Reg','<=',$inputs['hasta']);
+		}		
 
-
-		
-/*		//revisar carreras y fechas si esta funcionando falta implementar bien
-		$arVisitas = $arVisitas->where('visita.Cod_carrera','=','1');
-
-		$arVisitas = $arVisitas->where('persona.Paterno','=','Rojas')
-								->paginate($this->numxPages);*/
+		if(isset($inputs['carrera_id']) && intval($inputs['carrera_id']) > 0){
+			$arVisitas = $arVisitas->where('visita.Cod_carrera','=',$inputs['carrera_id']);
+		}else{
+			$inputs['carrera_id'] = '';
+		}
+		$arVisitas = $arVisitas->paginate($this->numxPages);
+		 $queries = \DB::getQueryLog();
+		//return $queries[2];
+		//$arVisitas->setBaseUrl('custom/url');
 		$arCarrera = Carrera::all();
-		return \View::make('visitas.lista',array('data'=>$arVisitas,'arCarrera'=>$arCarrera));
+
+		return \View::make('visitas.lista',array('data'=>$arVisitas,'arCarrera'=>$arCarrera,'carreraId' => $inputs['carrera_id']));
 	}
 	public function getAllVisitas(){
-		$this->data = $this->getTabla()->get();
+		$arVisitas = $this->getTabla();
+		$inputs = \Input::All();
+		if(isset($inputs['desde']) && $inputs['desde'] != ''){
+			$arVisitas = $arVisitas->where('visita.Fec_Reg','>=',$inputs['desde']);
+		}
+		if(isset($inputs['hasta']) && $inputs['hasta'] != ''){
+			$arVisitas = $arVisitas->where('visita.Fec_Reg','<=',$inputs['hasta']);
+		}	
+		if(isset($inputs['carrera_id']) && intval($inputs['carrera_id']) > 0){
+			$arVisitas = $arVisitas->where('visita.Cod_carrera','=',$inputs['carrera_id']);
+		}else{
+			$inputs['carrera_id'] = '';
+		}		
+		$this->data = $arVisitas->get();
 
 		//return dd($this->data);
 		foreach ($this->data as $key => $value) {
@@ -117,7 +141,8 @@ WHERE rv.Id_Visita = visita.Id_Visita) as referencias')
 		        	array(
 		        			'cabeceras'=>array('Paterno','Materno','Nombres','carrera','Telefono','Celular','Correo','Fec_Reg','referencias'),
 		        			'cabecerasText'=>array('Ap. Paterno','Ap. Materno','Nombres','Carrera','Teléfono','Celular','Correo','Fecha','Referencias'),
-		        			'data'=> $this->data
+		        			'data'=> $this->data,
+		        			'carreraId' => ''
 		        		)
 		        );
 

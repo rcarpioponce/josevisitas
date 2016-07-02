@@ -36,6 +36,9 @@ Route::get('/registro', array('uses' => 'RegistroController@index'));
 Route::post('/registro', array('uses' => 'RegistroController@saveVisita'));
 Route::get('/lista', array('uses' => 'RegistroController@listaVisita'));
 Route::get('/lista/reporte', array('uses' => 'RegistroController@reporte'));
+Route::get('/lista/editar/{cod}', array('uses' => 'RegistroController@editar'));
+Route::post('/lista/editar/{cod}', array('uses' => 'RegistroController@savePersona'));
+
 
 Route::get('correos/carreras/{cod}',function($cod){
 	return \DB::table('persona')

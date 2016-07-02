@@ -34,7 +34,7 @@
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini">JS</span>
       <!-- logo for regular state and mobile devices -->
-      <span class="logo-lg">Visitas</span>
+      <span class="logo-lg"><img src="{{asset('images.jpg')}}" width="35"> Visitas</span>
     </a>
     <!-- Header Navbar: style can be found in header.less -->
     <nav class="navbar navbar-static-top">

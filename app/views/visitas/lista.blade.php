@@ -8,20 +8,23 @@ Lista de Visitantes
 		<form class="form-inline">
 			<div class="form-group">
 				<label for="">Carrera</label>
-				<select class="form-control">
+				<select name="carrera_id" class="form-control">
 					<option value="">Seleccione...</option>
 					@foreach($arCarrera as $c)
-					<option value="{{$c['Cod_Carrera']}}">{{$c['Descripcion']}}</option>
+					<option value="{{$c['Cod_carrera']}}" @if($c['Cod_carrera'] == $carreraId) selected="" @endif >{{$c['Descripcion']}}</option>
 					@endforeach
 				</select>
 			</div>
 			<div class="form-group">
 				<label>Desde</label>
-				<input type="text" name="" id="" class="form-control">
+				<input type="date" name="desde" value="{{date('Y-m-d')}}" class="form-control">
 			</div>
 			<div class="form-group">
 				<label>Hasta</label>
-				<input type="text" name="" id="" class="form-control">
+				<input type="date" name="hasta" value="" class="form-control">
+			</div>
+			<div class="form-group">
+				<input class="btn btn-primary" type="submit" value="Buscar">
 			</div>
 			<div class="form-group text-right">
 				<a href="{{asset('lista/reporte')}}" class="btn btn-primary">Reporte en Excel</a>
@@ -53,8 +56,8 @@ Lista de Visitantes
 			<td>{{$d->Telefono}}</td>
 			<td>{{$d->Celular}}</td>
 			<td>{{$d->Correo}}</td>
-			<td>{{$d->Fec_Reg}}</td>
-			<td><a href="" class="btn btn-danger">Eliminar</a></td>
+			<td>{{Carbon\Carbon::parse($d->Fec_Reg)->format('d/m/Y H:i:s')}}</td>
+			<td><a href="{{asset('lista/editar')}}/{{$d->Id_Visita}}" class="btn btn-success">Editar</a></td>
 		</tr>
 		@endforeach
 	</tbody>

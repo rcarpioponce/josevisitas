@@ -18,4 +18,10 @@ class RegistroController extends Controller {
 	public function reporte(){
 		return $this->visitaRepo->getAllVisitas();
 	}
+	public function editar($cod){
+		return $this->repo->editarForm($cod);
+	}
+	public function savePersona($cod){
+		return $this->repo->saveFormVisita($cod);
+	}
 }
